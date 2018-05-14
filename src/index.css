@@ -1,5 +1,31 @@
-body {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: inherit;
+  font-weight: inherit;
+  /*paddings and borders not added to width and height, 
+  force inheritance from body this is a better practice 
+  because you can change the value anytime*/
+  box-sizing: inherit; 
+}
+
+html {
+  /*rem does not work in IE9 or below*/
+  /* 1rem = 10px; 10px/16px = 62.5 
+  Converts  default font size from 16px to 10px, 
+  User percentage for users who want to increase 
+  the font size of their browser*/
+  font-size: 62.5%;  
+}
+
+body {
+  /*font styles handled in body because they are 
+  inherited by all elements in body*/
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-weight: normal;
+  line-height: 1.7;
+  color: #333;
 }
