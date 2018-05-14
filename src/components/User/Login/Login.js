@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from '../../../containers/Forms/Forms';
 
+import classes from './Login.css';
+
 const login = props => {
     const document = {
         email: {
@@ -42,8 +44,8 @@ const login = props => {
     };
 
     return (
-        <div>
-            <h1>Login to Blackhole Comics</h1>
+        <div className={classes.Login}>
+            <h1 className={classes.Heading}>Login to Blackhole Comics</h1>
             <Form document={document} />
             <footer>
                 <p>Forgot your password or email?</p>

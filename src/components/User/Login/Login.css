@@ -1,0 +1,13 @@
+.Login {
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 0 20px -5px #333;
+    margin: 0 auto;
+    background-color: #fff;
+    border: solid 2px #F00;
+}
+
+.Heading {
+    font-size: 1.6rem;
+    font-weight: bold;
+}

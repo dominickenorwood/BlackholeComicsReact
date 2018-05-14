@@ -1,0 +1,27 @@
+.FormControl {
+    display: block;
+}
+
+.Label {
+    color: #f00;
+}
+
+.InputText {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+}
+
+.InputText:focus {
+    outline: none;
+    background-color: #ccc;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background-color: salmon;
+}
