@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../../UI/Forms/Forms';
+import Form from '../../../containers/Forms/Forms';
 
 const login = props => {
     const document = {
@@ -15,7 +15,8 @@ const login = props => {
                 isEmail: true
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Secret Identity'
         },
         password: {
             element: 'input',
@@ -29,7 +30,14 @@ const login = props => {
                 minLength: 8
             },
             valid: false,
-            touched: false
+            touched: false,
+            label: 'Password'
+        },
+        button: {
+            element: 'button',
+            config: {
+                text: 'Submit'
+            }
         }
     };
 

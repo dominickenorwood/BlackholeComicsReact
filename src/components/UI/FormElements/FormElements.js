@@ -1,15 +1,19 @@
 import React from 'react';
-import classes from './Elements.css';
+import classes from './FormElements.css';
 
 const element = props => {
     let element = null;
-    console.log(props.config);
+
     switch(props.config.element){
         case('label'):
-            element = <label />;
+            element = <label htmlFor={props.name}>{props.text}</label>;
             break;
         case('input'):
-            element = <input {...props.config.config} value={props.config.value} />;
+            element = <input 
+                        {...props.config.config}  
+                        name={props.name}
+                        value={props.config.value}
+                        onChange={props.changed} />;
             break;
         case('textarea'):
             element = <textarea />;
@@ -18,7 +22,7 @@ const element = props => {
             element = <select></select>
             break;
         case('button'):
-            element = <button></button>;
+            element = <button type="button">{props.config.config.text}</button>;
             break;
         case('datalist'):
             element = <datalist></datalist>;
