@@ -46,7 +46,7 @@ const login = props => {
     return (
         <div className={classes.Login}>
             <h1 className={classes.Heading}>Login to Blackhole Comics</h1>
-            <Form document={document} />
+            <Form document={document} submit={props.submitHandler} name={'user-login'} />
             <footer>
                 <p>Forgot your password or email?</p>
             </footer>

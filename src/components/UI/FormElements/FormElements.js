@@ -35,7 +35,7 @@ const element = props => {
             element = <select></select>
             break;
         case('button'):
-            element = <button type="button">{props.config.config.text}</button>;
+            element = <button type="submit">{props.config.config.text}</button>;
             break;
         case('datalist'):
             element = <datalist></datalist>;

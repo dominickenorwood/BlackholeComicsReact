@@ -1,4 +1,5 @@
 // axios endpoint instances
+import axios from 'axios';
 import authNewUser from '../../api/authNewUser';
 import authExistingUser from '../../api/authExistingUser';
 
@@ -60,7 +61,7 @@ export const auth = (email, password, isRegister = false) => {
             instance = authExistingUser;
         }
 
-        instance.post(keys.AUTH_KEY, authData)
+        instance.post(`?key=${keys.AUTH_KEY}`, authData)
             .then(response => {
                 console.log(response);
                 const tokenExpiration = response.data.expiresIn;

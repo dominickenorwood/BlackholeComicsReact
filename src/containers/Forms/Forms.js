@@ -56,7 +56,7 @@ class Forms extends Component {
 
     render(){
         return (
-            <form>           
+            <form onSubmit={(event) => this.props.submit(event, {...this.state.controls, form_name: this.props.name})}>           
                 {
                     Object.keys(this.state.controls).map(key => {
                         let label = null;
