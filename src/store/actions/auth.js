@@ -1,5 +1,4 @@
 // axios endpoint instances
-import axios from 'axios';
 import authNewUser from '../../api/authNewUser';
 import authExistingUser from '../../api/authExistingUser';
 
