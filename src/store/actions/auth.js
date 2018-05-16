@@ -1,3 +1,6 @@
+
+import { postNewUser, getUser } from './';
+
 // axios endpoint instances
 import authNewUser from '../../api/authNewUser';
 import authExistingUser from '../../api/authExistingUser';
@@ -5,6 +8,7 @@ import authExistingUser from '../../api/authExistingUser';
 // constants clusters
 import * as keys from '../../api/keys';
 import * as actionTypes from './actionTypes';
+
 
 export const authStart = () => {
     return {
@@ -45,7 +49,7 @@ export const checkAuthTimeout = expirationTime => {
     }
 }
 
-export const auth = (email, password, isRegister = false) => {
+export const auth = (email, password, username = null) => {
     return dispatch => {
         dispatch(authStart());
 
@@ -56,7 +60,7 @@ export const auth = (email, password, isRegister = false) => {
         };
 
         let instance = authNewUser;
-        if(!isRegister){
+        if(!username){
             instance = authExistingUser;
         }
 
@@ -71,6 +75,19 @@ export const auth = (email, password, isRegister = false) => {
 
                 dispatch(authSuccess(response.data.token, response.data.localId));
                 dispatch(checkAuthTimeout(tokenExpiration));
+
+                console.log('[AUTH RESPONSE]', response);
+                if(username){
+                    const user = {
+                        email: response.data.email,
+                        userId: response.data.localId,
+                        username
+                    }
+                    dispatch(postNewUser(user))
+                } else {
+                    dispatch(getUser(response.data.idToken, response.data.localId))
+                }
+
             })
             .catch(err => {
                 console.log('[CATCH ERROR]', err.response.data.error);

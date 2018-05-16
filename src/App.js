@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+// import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+// import { connect } from 'react-redux';
 
 import Aux from './hoc/Auxillary/Auxillary';
 import Auth from './containers/Authenticate/Authenticate';

@@ -9,7 +9,7 @@ const login = props => {
             element: 'input',
             config: {
                 type: 'email',
-                placeholder: 'Enter Membership Email'
+                placeholder: 'Email or Username'
             },
             value: '',
             validation: {
@@ -24,16 +24,16 @@ const login = props => {
             element: 'input',
             config: {
                 type: 'password',
-                placeholder: 'Secret Words'
+                placeholder: 'Password'
             },
             value: '',
             validation: {
                 required: true,
-                minLength: 8
+                minLength: 6
             },
             valid: false,
             touched: false,
-            label: 'Password'
+            label: 'Cast spell.'
         },
         button: {
             element: 'button',

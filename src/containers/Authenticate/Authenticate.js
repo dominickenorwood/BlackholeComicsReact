@@ -16,9 +16,9 @@ class Authenticate extends Component {
 
     submitHandler = (event, form) => {
         event.preventDefault();
-        const isSignup = (form.form_name === 'register') ? true : false;
+        const username = (form.form_name === 'register') ? form.username.value : null;
         console.log('[USER]', form);
-        this.props.onAuth(form.email.value, form.password.value, isSignup);
+        this.props.onAuth(form.email.value, form.password.value, username);
     }
 
     render() {
@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+        onAuth: (email, password, username) => dispatch(actions.auth(email, password, username))
     }
 }
 

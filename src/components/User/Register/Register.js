@@ -9,7 +9,7 @@ const register = props => {
             element: 'input',
             config: {
                 type: 'email',
-                placeholder: 'Enter Membership Email'
+                placeholder: 'Enter Email Address'
             },
             value: '',
             validation: {
@@ -18,13 +18,43 @@ const register = props => {
             },
             valid: false,
             touched: false,
-            label: 'Secret Identity'
+            label: 'How will the mayor contact you?'
+        },
+        username: {
+            element: 'input',
+            config: {
+                type: 'text',
+                placeholder: 'Username'
+            },
+            value: '',
+            validation: {
+                required: true,
+                minLength: 3
+            },
+            valid: false,
+            touched: false,
+            label: 'Your secret identity'
         },
         password: {
             element: 'input',
             config: {
                 type: 'password',
-                placeholder: 'Secret Words'
+                placeholder: 'Password'
+            },
+            value: '',
+            validation: {
+                required: true,
+                minLength: 6
+            },
+            valid: false,
+            touched: false,
+            label: 'Your secret magical phrase.'
+        },
+        confirm: {
+            element: 'input',
+            config: {
+                type: 'password',
+                placeholder: 'Confirm password'
             },
             value: '',
             validation: {
@@ -33,7 +63,7 @@ const register = props => {
             },
             valid: false,
             touched: false,
-            label: 'Password'
+            label: 'What was that phrase again?'
         },
         button: {
             element: 'button',
