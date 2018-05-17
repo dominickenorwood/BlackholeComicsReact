@@ -1,19 +1,10 @@
 import instance from '../../api/postToAPI';
 import * as actionTypes from './actionTypes';
 
-export const newUser = (userId, email, username) => {
+export const updateUser = user => {
     return {
-        type: actionTypes.NEW_USER,
-        userId,
-        email,
-        username
-    }
-}
-
-export const fetchUser = user => {
-    return {
-        type: actionTypes.FETCH_USER,
-        ...user
+        type: actionTypes.UPDATE_USER,
+        user
     }
 }
 
@@ -24,9 +15,14 @@ export const getUser = (token, userId) => {
         instance.get(`/users.json${queryParams}`)
             .then(response => {
                 console.log('[FETCHED USER]', response);
+                const userKey = Object.keys(response.data);
+                const userData = {
+                    ...response.data[userKey]
+                };
+                dispatch(updateUser(userData));
             })
             .catch(error => {
-                console.log('[GET NEW USER ERROR]', error);
+                console.log('[GET USER ERROR]', error);
             });
     }
 }
@@ -36,7 +32,7 @@ export const postNewUser = user => {
         instance.post('/users.json', user)
             .then(response => {
                 console.log('[NEW USER]', response);
-                dispatch(newUser(user.userId, user.email, user.username));
+                dispatch(updateUser(user));
             })
             .catch(error => {
                 console.log('[POST NEW USER ERROR]', error);

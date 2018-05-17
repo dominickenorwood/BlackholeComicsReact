@@ -37,24 +37,15 @@ const initialState = {
     story: null
 };
 
-const createUser = (state, action) => {
+const updateUser = (state, action) => {
     return updateObject(state, {
-        userId: action.userId,
-        email: action.email,
-        username: action.username,
-    })
-}
-
-const fetchUser = (state, action) => {
-    return updateObject(state, {
-        ...action
+        ...action.user
     })
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case actionTypes.NEW_USER: return createUser(state, action);
-        case actionTypes.FETCH_USER: return fetchUser(state, action);
+        case actionTypes.UPDATE_USER: return updateUser(state, action);
         default: return state;
     }
 }
