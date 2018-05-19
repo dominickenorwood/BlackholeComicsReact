@@ -8,7 +8,9 @@ import * as actions from '../../store/actions';
 
 class Authenticate extends Component {
 
-    state = {};
+    state = {
+        login: true
+    };
 
     componentDidMount(){
 
@@ -21,12 +23,26 @@ class Authenticate extends Component {
         this.props.onAuth(form.email.value, form.password.value, username);
     }
 
+    switch = (event) => {
+        event.preventDefault();
+        console.log('switch views')
+        this.setState({ login : !this.state.login });
+    }
+
     render() {
+        let form = <Login 
+                    submitHandler={this.submitHandler} 
+                    switchHandler={this.switch} />;
+
+        if(!this.state.login){
+            form = <Register 
+                    submitHandler={this.submitHandler} 
+                    switchHandler={this.switch} />;
+        }
+
         return(
             <Aux>
-                <div>Authenticate User</div>
-                <Login submitHandler={this.submitHandler} />
-                <Register submitHandler={this.submitHandler} />
+                {form}
             </Aux>
         );
     }

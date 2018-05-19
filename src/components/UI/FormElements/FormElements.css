@@ -1,27 +1,61 @@
 .FormControl {
     display: block;
+    margin-bottom: 2px;
 }
 
 .Label {
-    color: #f00;
+    color: #333;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .InputText {
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font: inherit;
-    padding: 6px 10px;
     display: block;
     width: 100%;
+    padding: 1.5rem 2.5rem 1.5rem 0;
+
+    color: #000;
+    border: none;
+    border-bottom: 5px solid #84aae8;
+    background-color: #fff;
+    outline: none;
+
+    font: inherit;
+    font-size: 1.6rem;;
+    transition: .3s all;
 }
 
 .InputText:focus {
-    outline: none;
-    background-color: #ccc;
+    padding-left: 2.5rem;
+    border-color: #52ba2c;
+    /*box-shadow: -.3rem .3rem .3rem -.15rem #aaa;*/
 }
 
 .Invalid {
-    border: 1px solid red;
-    background-color: salmon;
+    padding-left: 2.5rem;
+    border-color: #ba2c2c !important;
+    background-color: #ffd1d1;
+}
+
+.Button {
+    width: 50%;
+    display: block;
+    padding: 1rem;
+    margin: 2rem auto;
+
+    color: #fff;
+    border: none;
+    background-color: #52ba2c;
+    border-radius: 2px;
+
+    font: inherit;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .3s all;
+}
+
+.Button:hover {
+    background-color: #db1866;
 }

@@ -11,7 +11,7 @@ const element = props => {
 
     switch(props.config.element){
         case('label'):
-            elementClasses.push(classes.Label)
+            elementClasses.push(classes.Label);
             element = <label 
                         htmlFor={props.name}
                         className={elementClasses.join(' ')}>{props.text}</label>;
@@ -35,7 +35,9 @@ const element = props => {
             element = <select></select>
             break;
         case('button'):
-            element = <button type="submit">{props.config.config.text}</button>;
+            elementClasses.push(classes.Button);
+            element = <button type="submit"
+                              className={elementClasses.join(' ')}>{props.config.config.text}</button>;
             break;
         case('datalist'):
             element = <datalist></datalist>;

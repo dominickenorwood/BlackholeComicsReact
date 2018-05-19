@@ -18,7 +18,7 @@ const login = props => {
             },
             valid: false,
             touched: false,
-            label: 'Secret Identity'
+            label: 'Enter a Secret Identity.'
         },
         password: {
             element: 'input',
@@ -33,7 +33,7 @@ const login = props => {
             },
             valid: false,
             touched: false,
-            label: 'Cast spell.'
+            label: 'Cast Your Magical Spell.'
         },
         button: {
             element: 'button',
@@ -45,10 +45,11 @@ const login = props => {
 
     return (
         <div className={classes.Login}>
-            <h1 className={classes.Heading}>Login to Blackhole Comics</h1>
+            <h1 className={classes.Heading}>Login</h1>
             <Form document={document} submit={props.submitHandler} name={'user-login'} />
             <footer>
-                <p>Forgot your password or email?</p>
+                <p>Want to become a <a href="#" onClick={(event) => props.switchHandler(event)}>member</a>?</p>
+                <p>Forgot your <a href="#">password</a> or <a href="#">email</a>?</p>
             </footer>
         </div>
     );

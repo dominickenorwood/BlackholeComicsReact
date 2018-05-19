@@ -75,8 +75,12 @@ const register = props => {
 
     return (
         <div className={classes.Register}>
-            <h1 className={classes.Heading}>Register</h1>
+            <h1 className={classes.Heading}>Become A Member</h1>
+            <p>Find out what the advantages are from becoming a member.</p>
             <Form document={document} submit={props.submitHandler} name={'register'} />
+            <footer>
+                <p>Want to go back to <a href="#" onClick={(event) => props.switchHandler(event)}>login</a>?</p>
+            </footer>
         </div>
     );
 }
