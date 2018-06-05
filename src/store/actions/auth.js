@@ -33,7 +33,7 @@ export const authFail = error => {
 
 export const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
+    localStorage.removeItem('tokenExpiration');
     localStorage.removeItem('userId');
 
     return {
@@ -43,9 +43,14 @@ export const logout = () => {
 
 export const checkAuthTimeout = expirationTime => {
     return dispatch => {
+        // setTimeout(() => {
+        //     console.log('logout time')
+        //     dispatch(logout());
+        // }, expirationTime * 1000);
         setTimeout(() => {
+            console.log('logout time', expirationTime * 1000) //1528230846309000
             dispatch(logout());
-        }, expirationTime);
+        }, 5000);
     }
 }
 
@@ -67,7 +72,7 @@ export const auth = (email, password, username = null) => {
         instance.post(`?key=${keys.AUTH_KEY}`, authData)
             .then(response => {
                 console.log(response);
-                const tokenExpiration = response.data.expiresIn;
+                const tokenExpiration = new Date(new Date().getTime() + response.data.expiresIn * 1000);
 
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('tokenExpiration', tokenExpiration);
@@ -105,8 +110,8 @@ export const setAuthRedirectPath = path => {
 
 export const authCheckState = () => {
     return dispatch => {
+        console.log('auth check');
         const token = localStorage.getItem('token');
-
         if(!token){
             dispatch(logout());
         } else {
@@ -116,7 +121,7 @@ export const authCheckState = () => {
             } else {
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch(checkAuthTimeout(tokenExpiration));
+                dispatch((checkAuthTimeout(tokenExpiration.getTime() - new Date().getTime())) / 1000);
             }
         }
     }
