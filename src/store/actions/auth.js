@@ -42,15 +42,12 @@ export const logout = () => {
 }
 
 export const checkAuthTimeout = expirationTime => {
+    console.log('[Check Auth Expiration]', expirationTime);
     return dispatch => {
-        // setTimeout(() => {
-        //     console.log('logout time')
-        //     dispatch(logout());
-        // }, expirationTime * 1000);
         setTimeout(() => {
             console.log('logout time', expirationTime * 1000) //1528230846309000
-            dispatch(logout());
-        }, 5000);
+            //dispatch(logout());
+        }, expirationTime * 1000);
     }
 }
 
@@ -80,6 +77,7 @@ export const auth = (email, password, username = null) => {
 
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(tokenExpiration));
+                console.log('[Token Expiration]', tokenExpiration);
 
                 console.log('[AUTH RESPONSE]', response);
                 if(username){
@@ -116,12 +114,16 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const tokenExpiration = new Date(localStorage.getItem('tokenExpiration'));
+            console.log('[token Expiration]', tokenExpiration);
+            console.log('[New Date]', new Date());
             if(tokenExpiration <= new Date()){
+                console.log('AUTH CHECK STATE LOGOUT')
                 dispatch(logout());
             } else {
+                console.log('AUTH CHECK LOGIN!!!!')
                 const userId = localStorage.getItem('userId');
                 dispatch(authSuccess(token, userId));
-                dispatch((checkAuthTimeout(tokenExpiration.getTime() - new Date().getTime())) / 1000);
+                // dispatch((checkAuthTimeout(tokenExpiration.getTime() - new Date().getTime())) / 1000);
             }
         }
     }

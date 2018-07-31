@@ -1,0 +1,9 @@
+.Account {
+    width: 80%;
+    padding: 4rem;
+    margin: 50px auto;
+
+    background-color: #fff;
+    box-shadow: -.5rem .5rem 2rem -.5rem #333;
+    border-radius: 1px;
+}

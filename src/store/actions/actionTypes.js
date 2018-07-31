@@ -8,3 +8,4 @@ export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
 
 export const UPDATE_USER = 'UPDATE_USER';
 export const SET_USER = 'SET_USER';
+export const GET_USER = 'GET_USER';
