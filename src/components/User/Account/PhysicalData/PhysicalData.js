@@ -1,9 +1,12 @@
 import React from 'react';
+import classes from './PhysicalData.css';
 
 const physicalData = props => {
 
     return (
-        <div>Physical Data</div>
+        <main>
+            Physical Data
+        </main>
     )
 }
 

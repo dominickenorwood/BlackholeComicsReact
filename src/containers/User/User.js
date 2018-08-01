@@ -7,6 +7,12 @@ import * as actions from '../../store/actions';
 import classes from './User.css';
 
 class User extends Component {
+
+    submitHandler = event => {
+        event.preventDefault();
+        console.log('Update User')
+    }
+
     componentDidMount(){
         console.log('[User Props]', this.props);
         this.props.getUser(this.props.token, this.props.userId);
@@ -19,8 +25,10 @@ class User extends Component {
                     avatar={ this.props.user.avatar }
                     username={ this.props.user.username }
                     email={ this.props.user.email }
-                    password={ null } />
+                    password={ null }
+                    story={ this.props.user.story } />
                 <PhysicalData />
+                <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>
             </div>
         )
     }

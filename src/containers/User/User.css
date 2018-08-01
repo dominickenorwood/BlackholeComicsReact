@@ -7,3 +7,26 @@
     box-shadow: -.5rem .5rem 2rem -.5rem #333;
     border-radius: 1px;
 }
+
+.Button {
+    width: 50%;
+    display: block;
+    padding: 1rem;
+    margin: 2rem auto;
+
+    color: #fff;
+    border: none;
+    background-color: #52ba2c;
+    border-radius: 2px;
+
+    font: inherit;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .3s all;
+}
+
+.Button:hover {
+    background-color: #db1866;
+}
