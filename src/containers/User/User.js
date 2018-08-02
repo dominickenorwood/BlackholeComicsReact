@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Aux from '../../hoc/Auxillary/Auxillary';
 import SiteData from '../../components/User/Account/SiteData/SiteData';
 import PhysicalData from '../../components/User/Account/PhysicalData/PhysicalData';
 import * as actions from '../../store/actions';
@@ -19,16 +20,23 @@ class User extends Component {
     }
 
     render() {
+        let page = <div>Loading Account page...</div>;
+        if(this.props.user.userId){
+            page = <Aux>
+                    <SiteData
+                        avatar={ this.props.user.avatar }
+                        username={ this.props.user.username }
+                        email={ this.props.user.email }
+                        password={ null }
+                        story={ this.props.user.story } />
+                    <PhysicalData />
+                    <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>
+                </Aux>
+        }
+
         return (
             <div className={classes.Account}>
-                <SiteData
-                    avatar={ this.props.user.avatar }
-                    username={ this.props.user.username }
-                    email={ this.props.user.email }
-                    password={ null }
-                    story={ this.props.user.story } />
-                <PhysicalData />
-                <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>
+                { page }
             </div>
         )
     }
