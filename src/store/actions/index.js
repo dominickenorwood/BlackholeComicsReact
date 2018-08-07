@@ -1,3 +1,3 @@
 export { auth, logout, setAuthRedirectPath, authCheckState } from './auth';
 
-export { postNewUser, getUser } from './user';
+export { postNewUser, getUser, updateUser, updateUserAPI } from './user';

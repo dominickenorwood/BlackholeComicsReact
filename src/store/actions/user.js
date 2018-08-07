@@ -28,6 +28,7 @@ export const getUser = (token, userId) => {
 }
 
 export const postNewUser = user => {
+    console.log('[Post New User]', user);
     return dispatch => {
         instance.post('/users.json', user)
             .then(response => {
@@ -36,6 +37,19 @@ export const postNewUser = user => {
             })
             .catch(error => {
                 console.log('[POST NEW USER ERROR]', error);
+            });
+    }
+}
+
+export const updateCurrentUser = user => {
+    return dispatch => {
+        instance.post('/users.json', user)
+            .then(response => {
+                console.log('[UPDATE CURRENT USER]', response);
+                dispatch(() => console.log())
+            })
+            .catch(error => {
+                console.log('[UPDATE CURRENT USER ERROR]', error);
             });
     }
 }

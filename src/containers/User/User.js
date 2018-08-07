@@ -8,15 +8,30 @@ import * as actions from '../../store/actions';
 import classes from './User.css';
 
 class User extends Component {
+    state = {
+        valid: true,
+        errors: [],
+        success: []
+    }
+
+    validateHandler = valid => {
+        this.setState({ valid })
+    }
 
     submitHandler = event => {
         event.preventDefault();
-        console.log('Update User')
+        if(this.state.valid){
+            console.log('Update User');
+            this.props.updateUserAPI(this.props.user);
+        }
     }
 
     componentDidMount(){
         console.log('[User Props]', this.props);
-        this.props.getUser(this.props.token, this.props.userId);
+
+        if(!this.props.user.userId){
+            this.props.getUser(this.props.token, this.props.userId);
+        }
     }
 
     render() {
@@ -28,7 +43,9 @@ class User extends Component {
                         username={ this.props.user.username }
                         email={ this.props.user.email }
                         password={ null }
-                        story={ this.props.user.story } />
+                        story={ this.props.user.story }
+                        validateHandler={ this.validateHandler }
+                        update={ this.props.updateUser } />
                     <PhysicalData />
                     <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>
                 </Aux>
@@ -53,7 +70,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getUser: (token, userId) => dispatch(actions.getUser(token, userId))
+        getUser: (token, userId) => dispatch(actions.getUser(token, userId)),
+        updateUser: (user) => dispatch(actions.updateUser(user)),
+        updateUserAPI: (user) => dispatch(actions.updateUserAPI(user))
     }
 }
 
