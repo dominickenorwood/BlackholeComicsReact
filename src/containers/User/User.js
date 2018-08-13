@@ -22,15 +22,15 @@ class User extends Component {
         event.preventDefault();
         if(this.state.valid){
             console.log('Update User');
-            this.props.updateUserAPI(this.props.user);
+            this.props.updateUserAPI( this.props.user );
         }
     }
 
     componentDidMount(){
-        console.log('[User Props]', this.props);
+        console.log( '[User Props]', this.props );
 
         if(!this.props.user.userId){
-            this.props.getUser(this.props.token, this.props.userId);
+            this.props.getUser( this.props.token, this.props.userId );
         }
     }
 
@@ -46,13 +46,19 @@ class User extends Component {
                         story={ this.props.user.story }
                         validateHandler={ this.validateHandler }
                         update={ this.props.updateUser } />
-                    <PhysicalData />
+                    <PhysicalData
+                        firstName={ this.props.user.first_name }
+                        lastName={ this.props.user.last_name }
+                        homeAddress={ this.props.user.home_address }
+                        shippingAddress={ this.props.user.shipping_address }
+                        validateHandler={ this.validateHandler }
+                        update={ this.props.updateUser } />
                     <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>
                 </Aux>
         }
 
         return (
-            <div className={classes.Account}>
+            <div className={ classes.Account }>
                 { page }
             </div>
         )

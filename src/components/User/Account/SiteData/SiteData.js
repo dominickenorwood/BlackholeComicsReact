@@ -26,7 +26,6 @@ const siteData = props => {
                             validateContainer={ props.validateHandler }
                             updateKey="username"
                             updateStore={ props.update } />
-                    </div>
                     <div className={ classes.Control }>
                         <label className={ classes.Label }>Email</label>
                         <FormInput 
@@ -38,6 +37,7 @@ const siteData = props => {
                             validateContainer={ props.validateHandler }
                             updateKey="email"
                             updateStore={ props.update } />
+                    </div>
                     </div>
                     <Password />
                 </div>

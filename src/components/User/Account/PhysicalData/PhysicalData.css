@@ -1,0 +1,81 @@
+.Main {
+    margin-top: 2rem;
+}
+
+.Wrapper {
+    display: flex;
+    margin: 0 -2rem;
+}
+
+.Avatar {
+    width: 30%;
+    margin-right: 2rem;
+}
+
+.Avatar img {
+    display: block;
+    max-width: 100%;
+}
+
+.Credentials {
+    width: 100%;
+}
+
+.Control {
+    display: block;
+    margin-bottom: 1rem;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.Label {
+    color: #333;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.Input {
+    display: block;
+    width: 100%;
+    padding: .5rem 1.5rem .5rem 0;
+
+    color: #000;
+    border: none;
+    border-bottom: 2px solid #84aae8;
+    background-color: #fff;
+    outline: none;
+
+    font: inherit;
+    font-size: 1.4rem;;
+    transition: .3s all;
+}
+
+.Input:focus {
+    padding-left: 1.5rem;
+    border-color: #52ba2c;
+    /*box-shadow: -.3rem .3rem .3rem -.15rem #aaa;*/
+}
+
+.Invalid {
+    padding-left: 2.5rem;
+    border-color: #ba2c2c !important;
+    background-color: #ffd1d1;
+}
+
+.TextArea {
+    display: block;
+    width: 100%;
+    min-height: 8rem;
+    padding: 0 1.5rem .5rem 0;
+
+    color: #000;
+    border: none;
+    border-bottom: 2px solid #84aae8;
+    background-color: #fff;
+    outline: none;
+
+    font: inherit;
+    font-size: 1.4rem;;
+    transition: .3s all;
+}
+
