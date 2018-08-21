@@ -79,3 +79,11 @@
     transition: .3s all;
 }
 
+.Address {
+    margin-top: 1.5rem;
+}
+
+.Title {
+    font-size: 2rem;
+    font-weight: 600;
+}

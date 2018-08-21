@@ -15,10 +15,8 @@ class TextArea extends Component {
             this.setState({ valid });
             this.props.validateContainer( valid );
         }
-
-        const updateUser = {};
-        updateUser[this.props.updateKey] = value;
-        this.props.updateStore(updateUser);
+        
+        this.props.updateStore(value);
     }
 
     render() {

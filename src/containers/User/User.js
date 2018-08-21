@@ -39,18 +39,11 @@ class User extends Component {
         if(this.props.user.userId){
             page = <Aux>
                     <SiteData
-                        avatar={ this.props.user.avatar }
-                        username={ this.props.user.username }
-                        email={ this.props.user.email }
-                        password={ null }
-                        story={ this.props.user.story }
+                        user={ this.props.user }
                         validateHandler={ this.validateHandler }
                         update={ this.props.updateUser } />
                     <PhysicalData
-                        firstName={ this.props.user.first_name }
-                        lastName={ this.props.user.last_name }
-                        homeAddress={ this.props.user.home_address }
-                        shippingAddress={ this.props.user.shipping_address }
+                        user={ this.props.user }
                         validateHandler={ this.validateHandler }
                         update={ this.props.updateUser } />
                     <button onClick={ this.submitHandler } className={ classes.Button }>Submit</button>

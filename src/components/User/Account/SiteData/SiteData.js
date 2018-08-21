@@ -7,7 +7,7 @@ import defaultAvatar from '../../../../images/batman-logo.png'
 import classes from './SiteData.css';
 
 const siteData = props => {
-    const avatar = props.avatar ? props.avatar : defaultAvatar;
+    const avatar = props.user.avatar ? props.user.avatar : defaultAvatar;
     return (
         <header className={ classes.Header }>
             <div className={ classes.Wrapper }>
@@ -18,26 +18,24 @@ const siteData = props => {
                     <div className={ classes.Control }>
                         <label className={ classes.Label }>Username</label>
                         <FormInput 
-                            elementClass={ classes.Input } 
                             type="text" 
-                            value={ props.username }
-                            validate={{ required: true, minLength: 6 }}
+                            value={ props.user.username || '' }
+                            elementClass={ classes.Input } 
                             invalidClass={ classes.Invalid }
+                            validate={{ required: true, minLength: 6 }}
                             validateContainer={ props.validateHandler }
-                            updateKey="username"
-                            updateStore={ props.update } />
+                            updateStore={ (value) => props.update({ username: value }) } />
+                    </div>
                     <div className={ classes.Control }>
                         <label className={ classes.Label }>Email</label>
                         <FormInput 
+                            type="text" 
+                            value={ props.user.email || '' }
                             elementClass={ classes.Input } 
-                            type="email" 
-                            value={ props.email }
-                            validate={{ required: true, isEmail: true }}
                             invalidClass={ classes.Invalid }
+                            validate={{ required: true, isEmail: true }}
                             validateContainer={ props.validateHandler }
-                            updateKey="email"
-                            updateStore={ props.update } />
-                    </div>
+                            updateStore={ (value) => props.update({ email: value }) } />
                     </div>
                     <Password />
                 </div>
@@ -45,12 +43,11 @@ const siteData = props => {
             <div className={ classes.Story }>
                 <label className={ classes.Label }>Story</label>
                 <FormTextArea
-                    elementClass={ classes.TextArea }
-                    placeholder="What is your origin story?"
-                    value={ props.story ? props.story : '' }
                     maxLength='200'
-                    updateKey="story"
-                    updateStore={ props.update } />
+                    value={ props.user.story || '' }
+                    placeholder="What is your origin story?"
+                    elementClass={ classes.TextArea }
+                    updateStore={ (value) => props.update({ story: value }) } />
             </div>
         </header>
     )
