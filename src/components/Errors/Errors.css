@@ -1,0 +1,11 @@
+.Errors {
+
+}
+
+.Error {
+    text-align: left !important;
+    padding: 0 !important;
+    margin-top: .5rem;
+    color: #ba2c2c !important;
+    font-weight: 600;
+}

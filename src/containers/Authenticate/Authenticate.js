@@ -4,23 +4,56 @@ import { connect } from 'react-redux';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import Login from '../../components/User/Login/Login';
 import Register from '../../components/User/Register/Register';
+import ValidateControl from '../../helpers/ValidateForm';
 import * as actions from '../../store/actions';
 
 class Authenticate extends Component {
 
     state = {
-        login: true
+        login: true,
+        authenticate: {
+            email: null,
+            password: null,
+            confirmPassword: null,
+            username: null
+        },
+        valid: true,
+        errors: [],
+        success: []
     };
 
-    componentDidMount(){
-
+    validateHandler = valid => {
+        this.setState({ valid })
     }
 
-    submitHandler = (event, form) => {
+    updateAuthState = newState => {
+        this.setState({ authenticate: { ...this.state.authenticate, ...newState }})
+    }
+
+    submitHandler = event => {
         event.preventDefault();
-        const username = (form.form_name === 'register') ? form.username.value : null;
-        console.log('[USER]', form);
-        this.props.onAuth(form.email.value, form.password.value, username);
+        if(!this.state.valid){
+            return console.log('Cannot submit, form is invalid!!!');
+        }
+
+        console.log('Submit Form');
+        // const username = (form.form_name === 'register') ? form.username.value : null;
+        // console.log('[USER]', form);
+        // this.props.onAuth(form.email.value, form.password.value, username);
+    }
+
+    authenticateRegister = (event) => {
+        console.log('Authenticate and Register New User');
+    }
+
+    authenticateLogin = (event) => {
+        event.preventDefault();
+
+        if(!this.state.valid){
+            return console.log('Cannot submit, form is invalid!!!');
+        }
+
+        console.log('Authenticate and Login User');
     }
 
     switch = (event) => {
@@ -31,13 +64,15 @@ class Authenticate extends Component {
 
     render() {
         let form = <Login 
-                    submitHandler={this.submitHandler} 
-                    switchHandler={this.switch} />;
+                    submitHandler={ this.authenticateLogin } 
+                    switchHandler={ this.switch }
+                    validateHandler={ this.validateHandler }
+                    update={ this.updateAuthState } />;
 
         if(!this.state.login){
             form = <Register 
-                    submitHandler={this.submitHandler} 
-                    switchHandler={this.switch} />;
+                    submitHandler={ this.submitHandler } 
+                    switchHandler={ this.switch } />;
         }
 
         return(
