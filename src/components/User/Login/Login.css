@@ -20,6 +20,17 @@
     text-align: center;
 }
 
+.Form {
+    
+}
+
+.FormErrors {
+    background-color: #fbd6d7;
+    padding: .5rem 1.5rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+}
+
 .Control {
     display: block;
     margin-bottom: 3rem;

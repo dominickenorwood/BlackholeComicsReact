@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import Aux from '../../hoc/Auxillary/Auxillary';
 import Login from '../../components/User/Login/Login';
 import Register from '../../components/User/Register/Register';
-import ValidateControl from '../../helpers/ValidateForm';
+import APIErrorMessage from '../../helpers/APIErrorMessages';
+import * as CONSTANTS from '../../helpers/ConstantVars';
 import * as actions from '../../store/actions';
 
 class Authenticate extends Component {
@@ -53,14 +54,14 @@ class Authenticate extends Component {
         event.preventDefault();
 
         if(!this.state.authenticate.email || !this.state.authenticate.password){
-            return this.setState({ required : true })
+            return this.setState({ required : true, errors: [{ message : CONSTANTS.FORM_FIELDS_REQUIRED }] })
         }
         
         if(!this.state.valid){
-            return console.log('Cannot submit, form is invalid!!!');
+            return this.setState({ errors: [{ message : CONSTANTS.FORM_FIELDS_NOT_VALID }] })
         }
 
-        this.setState({ required : false })
+        this.setState({ required : false, errors: [] })
         console.log('[Auth User]', this.state.authenticate);
         this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, null);
     }
@@ -72,12 +73,23 @@ class Authenticate extends Component {
     }
 
     render() {
+        let errors = null;
+
+        if(this.state.errors.length > 0){
+            errors = this.state.errors;
+        }
+
+        if(this.props.authError){
+            errors = [{ message : APIErrorMessage(this.props.authError.message) }]
+        }
+
         let form = <Login 
                     submitHandler={ this.authenticateLogin } 
                     switchHandler={ this.switch }
                     validateHandler={ this.validateHandler }
                     required={ this.state.required }
-                    update={ this.updateAuthState } />;
+                    update={ this.updateAuthState }
+                    errors={ errors } />;
 
         if(!this.state.login){
             form = <Register 
@@ -87,7 +99,7 @@ class Authenticate extends Component {
 
         return(
             <Aux>
-                {form}
+                { form }
             </Aux>
         );
     }
@@ -96,7 +108,7 @@ class Authenticate extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null,
-        error: state.auth.error
+        authError: state.auth.error
     }
 }
 
