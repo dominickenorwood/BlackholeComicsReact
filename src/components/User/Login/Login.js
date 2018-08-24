@@ -16,7 +16,7 @@ const login = props => {
                     <label className={ classes.Label }>Enter a Secret Identity.</label>
                     <FormInput 
                         type="email" 
-                        value=""
+                        value={ props.authenticate.email || '' }
                         placeholder="Email Address"
                         elementClass={ classes.Input } 
                         invalidClass={ classes.Invalid }
@@ -29,7 +29,7 @@ const login = props => {
                     <label className={ classes.Label }>Cast Your Magical Spell.</label>
                     <FormInput 
                         type="password" 
-                        value=""
+                        value={ props.authenticate.password || '' }
                         placeholder="Password"
                         elementClass={ classes.Input } 
                         invalidClass={ classes.Invalid }

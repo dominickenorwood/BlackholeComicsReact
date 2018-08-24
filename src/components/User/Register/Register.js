@@ -1,83 +1,72 @@
 import React from 'react';
-import Form from '../../../containers/Forms/Forms';
+import FormInput from '../../../widgets/Forms/Input';
+import ErrorMessages from '../../Errors/Errors';
 
 import classes from './Register.css';
 
 const register = props => {
-    const document = {
-        email: {
-            element: 'input',
-            config: {
-                type: 'email',
-                placeholder: 'Enter Email Address'
-            },
-            value: '',
-            validation: {
-                required: true,
-                isEmail: true
-            },
-            valid: false,
-            touched: false,
-            label: 'How will the mayor contact you?'
-        },
-        username: {
-            element: 'input',
-            config: {
-                type: 'text',
-                placeholder: 'Username'
-            },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 3
-            },
-            valid: false,
-            touched: false,
-            label: 'Your secret identity'
-        },
-        password: {
-            element: 'input',
-            config: {
-                type: 'password',
-                placeholder: 'Password'
-            },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 6
-            },
-            valid: false,
-            touched: false,
-            label: 'Your secret magical phrase.'
-        },
-        confirm: {
-            element: 'input',
-            config: {
-                type: 'password',
-                placeholder: 'Confirm password'
-            },
-            value: '',
-            validation: {
-                required: true,
-                minLength: 8
-            },
-            valid: false,
-            touched: false,
-            label: 'What was that phrase again?'
-        },
-        button: {
-            element: 'button',
-            config: {
-                text: 'Submit'
-            }
-        }
-    };
+    const errors = props.errors ? <div className={ classes.FormErrors }><ErrorMessages messages={ props.errors } /></div> : null;
 
     return (
         <div className={classes.Register}>
             <h1 className={classes.Heading}>Become A Member</h1>
             <p>Find out what the advantages are from becoming a member.</p>
-            <Form document={document} submit={props.submitHandler} name={'register'} />
+            <form className={ classes.Form } onSubmit={ props.submitHandler } noValidate>
+                { errors }
+                <div className={ classes.Control }>
+                    <label className={ classes.Label }>How will the mayor contact you?</label>
+                    <FormInput 
+                        type="email" 
+                        value={ props.authenticate.email || '' }
+                        placeholder="Email Address"
+                        elementClass={ classes.Input } 
+                        invalidClass={ classes.Invalid }
+                        validate={{ isEmail: true }}
+                        validateContainer={ props.validateHandler }
+                        required={ props.required }
+                        updateStore={ (value) => props.update({ email : value }) } />
+                </div>
+                <div className={ classes.Control }>
+                    <label className={ classes.Label }>What is your secret identity?</label>
+                    <FormInput 
+                        type="text" 
+                        value={ props.authenticate.username || '' }
+                        placeholder="Username"
+                        elementClass={ classes.Input } 
+                        invalidClass={ classes.Invalid }
+                        validate={{ username : true }}
+                        validateContainer={ props.validateHandler }
+                        required={ props.required }
+                        updateStore={ (value) => props.update({ username : value }) } />
+                </div>
+                <div className={ classes.Control }>
+                    <label className={ classes.Label }>What is your secret magical word?</label>
+                    <FormInput 
+                        type="password" 
+                        value={ props.authenticate.password || '' }
+                        placeholder="Password"
+                        elementClass={ classes.Input } 
+                        invalidClass={ classes.Invalid }
+                        validate={{ isPassword: true }}
+                        validateContainer={ props.validateHandler }
+                        required={ props.required }
+                        updateStore={ (value) => props.update({ password: value }) } />
+                </div>
+                <div className={ classes.Control }>
+                    <label className={ classes.Label }>What was that secret magic phrase again?</label>
+                    <FormInput 
+                        type="password" 
+                        value={ props.authenticate.confirmPassword || '' }
+                        placeholder="Confirm Password"
+                        elementClass={ classes.Input } 
+                        invalidClass={ classes.Invalid }
+                        validateContainer={ props.validateHandler }
+                        required={ props.required }
+                        match={ props.authenticate.password }
+                        updateStore={ (value) => props.update({ confirmPassword: value }) } />
+                </div>
+                <button className={ classes.Button }>Submit</button>
+            </form>
             <footer>
                 <p>Want to go back to <a href="#" onClick={(event) => props.switchHandler(event)}>login</a>?</p>
             </footer>

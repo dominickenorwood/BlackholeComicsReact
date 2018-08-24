@@ -11,7 +11,7 @@ import * as actions from '../../store/actions';
 class Authenticate extends Component {
 
     state = {
-        login: true,
+        login: false,
         authenticate: {
             email: null,
             password: null,
@@ -46,12 +46,11 @@ class Authenticate extends Component {
         // this.props.onAuth(form.email.value, form.password.value, username);
     }
 
-    authenticateRegister = (event) => {
-        console.log('Authenticate and Register New User');
-    }
+    
 
     authenticateLogin = (event) => {
         event.preventDefault();
+        this.setState({ required : false, errors: [] })
 
         if(!this.state.authenticate.email || !this.state.authenticate.password){
             return this.setState({ required : true, errors: [{ message : CONSTANTS.FORM_FIELDS_REQUIRED }] })
@@ -61,9 +60,24 @@ class Authenticate extends Component {
             return this.setState({ errors: [{ message : CONSTANTS.FORM_FIELDS_NOT_VALID }] })
         }
 
-        this.setState({ required : false, errors: [] })
         console.log('[Auth User]', this.state.authenticate);
-        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, null);
+        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, null, false);
+    }
+
+    authenticateRegister = (event) => {
+        event.preventDefault();
+        this.setState({ required : false, errors: [] })
+
+        if(!this.state.authenticate.email || !this.state.authenticate.password || !this.state.authenticate.username || !this.state.authenticate.confirmPassword){
+            return this.setState({ required : true, errors: [{ message : CONSTANTS.FORM_FIELDS_REQUIRED }] })
+        }
+        
+        if(!this.state.valid || this.state.authenticate.password !== this.state.authenticate.confirmPassword){
+            return this.setState({ errors: [{ message : CONSTANTS.FORM_FIELDS_NOT_VALID }] })
+        }
+
+        console.log('[Auth User]', this.state.authenticate);
+        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, this.state.username, true);
     }
 
     switch = (event) => {
@@ -89,12 +103,18 @@ class Authenticate extends Component {
                     validateHandler={ this.validateHandler }
                     required={ this.state.required }
                     update={ this.updateAuthState }
-                    errors={ errors } />;
+                    errors={ errors }
+                    authenticate={ this.state.authenticate } />;
 
         if(!this.state.login){
             form = <Register 
-                    submitHandler={ this.submitHandler } 
-                    switchHandler={ this.switch } />;
+                    submitHandler={ this.authenticateRegister } 
+                    switchHandler={ this.switch }
+                    validateHandler={ this.validateHandler }
+                    required={ this.state.required }
+                    update={ this.updateAuthState }
+                    errors={ errors }
+                    authenticate={ this.state.authenticate } />;
         }
 
         return(
@@ -114,7 +134,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, username) => dispatch(actions.auth(email, password, username))
+        onAuth: (email, password, username, isNew) => dispatch(actions.auth(email, password, username, isNew))
     }
 }
 

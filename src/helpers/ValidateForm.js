@@ -18,6 +18,22 @@ const ValidateForm = (value, rules, name) => {
         errors.push({ message : `${ name } must be more then ${ rules.minLength } characters.`})
     };
 
+    if(rules.username){
+        let messages = '';
+
+        if(value.length <= 8){
+            messages = 'have more then 8 characters';
+        }
+
+        if(value.length >= 20){
+            messages = 'have less then 20 characters';
+        }
+
+        const pattern = /^.{8,20}$/;
+        valid = pattern.test(value) && valid;
+        errors.push({ message : `${ name } must ${ messages }.` })
+    }
+
     if(rules.isPassword){
         const messages = [];
         const patterns = {
@@ -46,6 +62,11 @@ const ValidateForm = (value, rules, name) => {
         const pattern = /^(?=.{8,})(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/;
         valid = pattern.test(value) && valid;
         errors.push({ message : `${ name } must ${ messages.join(', ') }.` })
+    }
+
+    if(rules.matchVal){
+        valid = value === rules.val ? true : false;
+        errors.push({ message : `${ name } does not match`})
     }
 
     return {

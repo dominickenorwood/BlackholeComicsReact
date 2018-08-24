@@ -51,7 +51,7 @@ export const checkAuthTimeout = expirationTime => {
     }
 }
 
-export const auth = (email, password, username = null) => {
+export const auth = (email, password, username, newUser) => {
     return dispatch => {
         dispatch(authStart());
 
@@ -62,7 +62,7 @@ export const auth = (email, password, username = null) => {
         };
 
         let instance = authNewUser;
-        if(!username){
+        if(!newUser){
             instance = authExistingUser;
         }
 

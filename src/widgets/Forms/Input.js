@@ -13,13 +13,17 @@ class Input extends Component {
         touched: false
     }
 
+    validate = value => {
+        const isValid  = ValidateControl(value, this.props.validate, this.props.placeholder);
+        this.setState({ isValid });
+        this.props.validateContainer( isValid.valid );
+    }
+
     changed = value => {
         this.setState({ value, touched: true });
         
         if(this.props.validate){
-            const isValid  = ValidateControl(value, this.props.validate, this.props.placeholder);
-            this.setState({ isValid });
-            this.props.validateContainer( isValid.valid );
+            this.validate(value);
         }
 
         this.props.updateStore(value);
@@ -32,6 +36,17 @@ class Input extends Component {
         if(!this.state.isValid.valid) {
             invalidControl = this.props.invalidClass;
             errors = <ErrorMessages messages={ this.state.isValid.errors } />
+        }
+
+        if(this.props.match && this.state.touched){
+            const isValid = ValidateControl(this.state.value, { matchVal : true, val: this.props.match }, this.props.placeholder);
+            if(!isValid.valid){
+                invalidControl = this.props.invalidClass;
+                errors = <ErrorMessages messages={ isValid.errors } />
+            } else {
+                invalidControl = null;
+                errors = null;
+            }
         }
 
         if(this.props.required && !this.state.touched){
