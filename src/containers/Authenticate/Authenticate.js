@@ -77,7 +77,7 @@ class Authenticate extends Component {
         }
 
         console.log('[Auth User]', this.state.authenticate);
-        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, this.state.username, true);
+        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, this.state.authenticate.username, true);
     }
 
     switch = (event) => {

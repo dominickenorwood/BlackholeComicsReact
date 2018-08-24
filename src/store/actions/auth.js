@@ -66,6 +66,8 @@ export const auth = (email, password, username, newUser) => {
             instance = authExistingUser;
         }
 
+        console.log('username', username);
+
         instance.post(`?key=${keys.AUTH_KEY}`, authData)
             .then(response => {
                 console.log(response);
@@ -80,7 +82,7 @@ export const auth = (email, password, username, newUser) => {
                 console.log('[Token Expiration]', tokenExpiration);
 
                 console.log('[AUTH RESPONSE]', response);
-                if(username){
+                if(newUser){
                     const user = {
                         email: response.data.email,
                         userId: response.data.localId,
