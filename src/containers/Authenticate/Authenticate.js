@@ -18,6 +18,7 @@ class Authenticate extends Component {
             username: null
         },
         valid: true,
+        required: false,
         errors: [],
         success: []
     };
@@ -36,6 +37,8 @@ class Authenticate extends Component {
             return console.log('Cannot submit, form is invalid!!!');
         }
 
+        
+
         console.log('Submit Form');
         // const username = (form.form_name === 'register') ? form.username.value : null;
         // console.log('[USER]', form);
@@ -49,11 +52,17 @@ class Authenticate extends Component {
     authenticateLogin = (event) => {
         event.preventDefault();
 
+        if(!this.state.authenticate.email || !this.state.authenticate.password){
+            return this.setState({ required : true })
+        }
+        
         if(!this.state.valid){
             return console.log('Cannot submit, form is invalid!!!');
         }
 
-        console.log('Authenticate and Login User');
+        this.setState({ required : false })
+        console.log('[Auth User]', this.state.authenticate);
+        this.props.onAuth(this.state.authenticate.email, this.state.authenticate.password, null);
     }
 
     switch = (event) => {
@@ -67,6 +76,7 @@ class Authenticate extends Component {
                     submitHandler={ this.authenticateLogin } 
                     switchHandler={ this.switch }
                     validateHandler={ this.validateHandler }
+                    required={ this.state.required }
                     update={ this.updateAuthState } />;
 
         if(!this.state.login){

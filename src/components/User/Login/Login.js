@@ -5,7 +5,7 @@ import FormInput from '../../../widgets/Forms/Input';
 import classes from './Login.css';
 
 const login = props => {
-    
+
     return (
         <div className={classes.Login}>
             <h1 className={classes.Heading}>Login</h1>
@@ -19,6 +19,7 @@ const login = props => {
                     invalidClass={ classes.Invalid }
                     validate={{ isEmail: true }}
                     validateContainer={ props.validateHandler }
+                    required={ props.required }
                     updateStore={ (value) => props.update({ email: value }) } />
             </div>
             <div className={ classes.Control }>
@@ -31,7 +32,8 @@ const login = props => {
                     invalidClass={ classes.Invalid }
                     validate={{ minLength: 6 }}
                     validateContainer={ props.validateHandler }
-                    updateStore={ (value) => console.log('[Update Password Login]', value) } />
+                    required={ props.required }
+                    updateStore={ (value) => props.update({ password: value }) } />
             </div>
             <button onClick={ props.submitHandler } className={ classes.Button }>Submit</button>
             <footer>

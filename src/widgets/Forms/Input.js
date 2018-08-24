@@ -7,12 +7,14 @@ class Input extends Component {
     state = {
         value : this.props.value,
         isValid : {
-            valid: true
-        }
+            valid: true,
+            errors: []
+        },
+        touched: false
     }
 
     changed = value => {
-        this.setState({ value });
+        this.setState({ value, touched: true });
         
         if(this.props.validate){
             const isValid  = ValidateControl(value, this.props.validate, this.props.placeholder);
@@ -24,8 +26,18 @@ class Input extends Component {
     }
 
     render(){
-        const invalidControl = !this.state.isValid.valid ? this.props.invalidClass : null;
-        const errors = !this.state.isValid.valid ? <ErrorMessages messages={ this.state.isValid.errors } /> : null;
+        let invalidControl = null;
+        let errors = null;
+        
+        if(!this.state.isValid.valid) {
+            invalidControl = this.props.invalidClass;
+            errors = <ErrorMessages messages={ this.state.isValid.errors } />
+        }
+
+        if(this.props.required && !this.state.touched){
+            const isValid = ValidateControl(this.state.value, { required : true }, this.props.placeholder);
+            errors = <ErrorMessages messages={ isValid.errors } />
+        }
 
         return(
             <Aux>
