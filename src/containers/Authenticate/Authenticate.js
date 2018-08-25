@@ -11,7 +11,7 @@ import * as actions from '../../store/actions';
 class Authenticate extends Component {
 
     state = {
-        login: false,
+        login: true,
         authenticate: {
             email: null,
             password: null,
@@ -30,23 +30,7 @@ class Authenticate extends Component {
 
     updateAuthState = newState => {
         this.setState({ authenticate: { ...this.state.authenticate, ...newState }})
-    }
-
-    submitHandler = event => {
-        event.preventDefault();
-        if(!this.state.valid){
-            return console.log('Cannot submit, form is invalid!!!');
-        }
-
-        
-
-        console.log('Submit Form');
-        // const username = (form.form_name === 'register') ? form.username.value : null;
-        // console.log('[USER]', form);
-        // this.props.onAuth(form.email.value, form.password.value, username);
-    }
-
-    
+    } 
 
     authenticateLogin = (event) => {
         event.preventDefault();
@@ -82,8 +66,19 @@ class Authenticate extends Component {
 
     switch = (event) => {
         event.preventDefault();
-        console.log('switch views')
-        this.setState({ login : !this.state.login });
+        this.setState({ 
+            login : !this.state.login,
+            authenticate: {
+                email: null,
+                password: null,
+                confirmPassword: null,
+                username: null
+            },
+            valid: true,
+            required: false,
+            errors: [],
+            success: []
+         });
     }
 
     render() {

@@ -12,6 +12,13 @@ export const getUser = (token, userId) => {
     return dispatch => {
         const queryParams = `?auth=${token}&orderBy="$key"&equalTo="${userId}"`;
 
+        instance.get(`/usernames.json?orderBy="username"`)
+            .then(response => {
+                console.log('GET TEST USERS', response);
+            })
+            .catch(error => {
+                console.log('[GET USER TEST ERROR]', error);
+            })
         instance.get(`/users.json${queryParams}`)
             .then(response => {
                 console.log('[FETCHED USER]', response);
@@ -30,6 +37,10 @@ export const getUser = (token, userId) => {
 export const postNewUser = user => {
     console.log('[Post New User]', user);
     return dispatch => {
+        instance.post('/usernames.json', { username : user.username })
+            .then(response => console.log('Posted username', response))
+            .catch(error => console.log('Unable to post username', error));
+            
         instance.patch(`/users/${ user.userId }.json`, user)
             .then(response => {
                 console.log('[NEW USER]', response);

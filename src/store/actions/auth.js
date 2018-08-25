@@ -89,8 +89,6 @@ export const auth = (email, password, username, newUser) => {
                         username
                     }
                     dispatch(postNewUser(user))
-                } else {
-                    dispatch(getUser(response.data.idToken, response.data.localId))
                 }
 
             })
