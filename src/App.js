@@ -19,6 +19,7 @@ class App extends Component {
     
     let routes = (
       <Switch>
+        <Route path="/comic" component={ Comic } />
         <Route path="/" exact component={ Auth } />
         <Redirect to="/" />
       </Switch>
