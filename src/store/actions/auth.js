@@ -31,6 +31,12 @@ export const authFail = error => {
     }
 }
 
+export const authClearErr = () => {
+    return {
+        type: actionTypes.AUTH_CLEAR_ERRORS
+    }
+}
+
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpiration');

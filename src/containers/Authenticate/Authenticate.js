@@ -66,6 +66,11 @@ class Authenticate extends Component {
 
     switch = (event) => {
         event.preventDefault();
+
+        if(this.props.authError){
+            this.props.authClearErr();
+        }
+        
         this.setState({ 
             login : !this.state.login,
             authenticate: {
@@ -79,6 +84,7 @@ class Authenticate extends Component {
             errors: [],
             success: []
          });
+         
     }
 
     render() {
@@ -129,7 +135,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, username, isNew) => dispatch(actions.auth(email, password, username, isNew))
+        onAuth: (email, password, username, isNew) => dispatch(actions.auth(email, password, username, isNew)),
+        authClearErr: () => dispatch(actions.authClearErr())
     }
 }
 
