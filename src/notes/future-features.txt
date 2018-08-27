@@ -1,0 +1,17 @@
+[ Auth Component ]
+    - Trim whitespace from begin to end on all input values.
+    - Don't allow spaces on passwords.
+    - Don't allow multiple spaces in a row for usernames.
+    - Check is username exists (API check after a second or two if username passes validation).
+    - Don't allow spaces in email.
+    - Reset password funcitonality.
+
+[ User Component ]
+    - Change email funcitonality.
+    - Change password funcitonality.
+    - Add form validation.
+    - API error handling on submit.
+
+[ General Components ]
+    - Image Uploader.
+    - Administraion

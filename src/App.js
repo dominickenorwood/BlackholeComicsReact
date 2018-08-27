@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Aux from './hoc/Auxillary/Auxillary';
 import Auth from './containers/Authenticate/Authenticate';
 import User from './containers/User/User';
+import Comic from './containers/Comic/Comic';
 import classes from './App.css';
 import * as actions from './store/actions/index';
 
@@ -26,6 +27,7 @@ class App extends Component {
     if(this.props.isAuthenticated){
       routes = (
         <Switch>
+          <Route path="/comic" component={ Comic } />
           <Route path="/" exact component={ User } />
           <Redirect to="/" />
         </Switch>
